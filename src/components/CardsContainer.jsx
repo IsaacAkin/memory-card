@@ -1,86 +1,85 @@
-function Card({ children }) {
+import { useState, useEffect } from "react";
+
+function Card({ children, onClick }) {
     return(
-        <div className="card" style={{
-                border: '1px solid white',
-                alignSelf: 'center',
-                justifySelf: 'center',
-                padding: '10px'
-            }}>
+        <div 
+        className="card"
+        style={{
+        border: '1px solid white',
+        alignSelf: 'center',
+        justifySelf: 'center',
+        padding: '10px'
+        }}
+        onClick={onClick}>
             {children}
         </div>
     )
 }
 
-// async function Image({ pokemon }) {
-//     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+function Pokemon({ pokemon }) {
+    const [spriteSrc, setSpriteSrc] = useState(null);
 
-//     if (!response.ok) {
-//         throw new Error("Pokemon name not valid");
-//     }
+    useEffect(() => {
+        async function fetchPokemonSprite(pokemon) {
+            try {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+                const data = await response.json();
 
-//     const src = response.sprites.front_default;
+                setSpriteSrc(data.sprites.front_default);
+            } catch (error) {
+                console.error("Pokemon name not valid", error);
+            }
+        }
 
-//     return <img src={src} alt="" />
-// }
+        fetchPokemonSprite(pokemon);
+    },)
 
-function Image({ src }) {
-    return <img src={src} alt="" style={{ border: '1px solid green' }}/>
-}
-
-function Name({ name }) {
-    return <p className="name" style={{ border: '1px solid green' }}>{name}</p>
-}
-
-export default function CardsContainer() {
     return(
         <>
-        <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"} />
-            <Name name={'Pikachu'} />
+        <img src={spriteSrc} alt={pokemon} style={{ border: '1px solid green' }} />
+        <p className="name" style={{ border: '1px solid green' }}>{pokemon}</p>
+        </>
+    )
+}
+
+export default function CardsContainer({ onClick }) {
+    return(
+        <>
+        <Card onClick={onClick}>
+            <Pokemon pokemon={'Pikachu'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/724.png"} />
-            <Name name={'Decidueye'} />
+            <Pokemon pokemon={'Decidueye'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/906.png"} />
-            <Name name={'Sprigatitio'} />
+            <Pokemon pokemon={'Sprigatito'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/570.png"} />
-            <Name name={'Zorua'} />
+            <Pokemon pokemon={'Zorua'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/194.png"} />
-            <Name name={'Wooper'} />
+            <Pokemon pokemon={'Wooper'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/218.png"} />
-            <Name name={'Slugma'} />
+            <Pokemon pokemon={'Slugma'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/436.png"} />
-            <Name name={'Bronzor'} />
+            <Pokemon pokemon={'Bronzor'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/553.png"} />
-            <Name name={'Krookodile'} />
+            <Pokemon pokemon={'Krookodile'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png"} />
-            <Name name={'Growlithe'} />
+            <Pokemon pokemon={'Growlithe'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/763.png"} />
-            <Name name={'Tsareena'} />
+            <Pokemon pokemon={'Tsareena'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/829.png"} />
-            <Name name={'Gossifleur'} />
+            <Pokemon pokemon={'Gossifleur'} />
         </Card>
         <Card>
-            <Image src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/903.png"} />
-            <Name name={'Sneasler'} />
+            <Pokemon pokemon={'Sneasler'} />
         </Card>
         </>
     )
