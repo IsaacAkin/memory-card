@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { pokemon } from "../data.js";
 
-function Card({ children }) {
+function Card({ children, id, handleScore }) {
     return(
         <div 
         className="card"
@@ -12,6 +12,7 @@ function Card({ children }) {
         padding: '10px',
         cursor: 'pointer'
         }}
+        onClick={() => handleScore(id)}
         >
             {children}
         </div>
@@ -52,13 +53,13 @@ function Pokemon({ pokemon }) {
     )
 }
 
-export default function Gameboard() {
+export default function Gameboard({ handleScore }) {
     return(
         <>
         {
             pokemon.map(mons => {
                 return(
-                    <Card key={mons.id}>
+                    <Card key={mons.id} id={mons.id} handleScore={handleScore}>
                         <Pokemon pokemon={mons.name} />
                     </Card>
                 )
