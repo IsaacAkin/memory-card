@@ -49,7 +49,7 @@ function App() {
         gridTemplateColumns: 'repeat(6, 1fr)',
         gap: '7px'
       }}>
-        <Gameboard handleScore={handleSelectedPokemon} />
+        <Gameboard handleScore={handleSelectedPokemon} score={currentScore} />
       </div>
     </div>
   )

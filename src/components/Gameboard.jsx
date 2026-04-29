@@ -53,14 +53,29 @@ function Pokemon({ pokemon }) {
     )
 }
 
-export default function Gameboard({ handleScore }) {
+export default function Gameboard({ handleScore, score }) {
+    const [array, setArray] = useState(pokemon);
+
+    useEffect(() => {
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]
+            }
+            
+            setArray(array);
+        }
+
+        shuffleArray(pokemon);
+    }, [score])
+
     return(
         <>
         {
-            pokemon.map(mons => {
+            array.map(pokemon => {
                 return(
-                    <Card key={mons.id} id={mons.id} handleScore={handleScore}>
-                        <Pokemon pokemon={mons.name} />
+                    <Card key={pokemon.id} id={pokemon.id} handleScore={handleScore}>
+                        <Pokemon pokemon={pokemon.name} />
                     </Card>
                 )
             })
