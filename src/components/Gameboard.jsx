@@ -32,6 +32,7 @@ function Pokemon({ pokemon }) {
 
                 if (!ignore) { 
                     setSpriteSrc(data.sprites.front_default);
+                    // setSpriteSrc(data.sprites.other["official-artwork"].front_default);
                 }
             } catch (error) {
                 console.error("Pokemon name not valid", error);
