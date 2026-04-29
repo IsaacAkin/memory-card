@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { pokemon } from "../data.js";
 
 function Card({ children }) {
     return(
@@ -43,45 +44,18 @@ function Pokemon({ pokemon }) {
     )
 }
 
-export default function Gameboard({ onClick }) {
+export default function Gameboard() {
     return(
         <>
-        <Card onClick={onClick}>
-            <Pokemon pokemon={'Pikachu'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Decidueye'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Sprigatito'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Zorua'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Wooper'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Slugma'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Bronzor'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Krookodile'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Growlithe'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Tsareena'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Gossifleur'} />
-        </Card>
-        <Card>
-            <Pokemon pokemon={'Sneasler'} />
-        </Card>
+        {
+            pokemon.map(mons => {
+                return(
+                    <Card key={mons.id}>
+                        <Pokemon pokemon={mons.name} />
+                    </Card>
+                )
+            })
+        }
         </>
     )
 }
