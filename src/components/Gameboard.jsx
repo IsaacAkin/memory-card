@@ -22,18 +22,26 @@ function Pokemon({ pokemon }) {
     const [spriteSrc, setSpriteSrc] = useState(null);
     
     useEffect(() => {
+        let ignore = false;
+
         async function fetchPokemonSprite(pokemon) {
             try {
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
                 const data = await response.json();
 
-                setSpriteSrc(data.sprites.front_default);
+                if (!ignore) { 
+                    setSpriteSrc(data.sprites.front_default);
+                }
             } catch (error) {
                 console.error("Pokemon name not valid", error);
             }
         }
 
         fetchPokemonSprite(pokemon);
+
+        return () => {
+            ignore = true;
+        }
     },[pokemon])
 
     return(
