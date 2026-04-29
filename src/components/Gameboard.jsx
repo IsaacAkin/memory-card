@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Card({ children, onClick }) {
+function Card({ children }) {
     return(
         <div 
         className="card"
@@ -8,9 +8,10 @@ function Card({ children, onClick }) {
         border: '1px solid white',
         alignSelf: 'center',
         justifySelf: 'center',
-        padding: '10px'
+        padding: '10px',
+        cursor: 'pointer'
         }}
-        onClick={onClick}>
+        >
             {children}
         </div>
     )
@@ -18,7 +19,7 @@ function Card({ children, onClick }) {
 
 function Pokemon({ pokemon }) {
     const [spriteSrc, setSpriteSrc] = useState(null);
-
+    
     useEffect(() => {
         async function fetchPokemonSprite(pokemon) {
             try {
@@ -32,7 +33,7 @@ function Pokemon({ pokemon }) {
         }
 
         fetchPokemonSprite(pokemon);
-    },)
+    },[pokemon])
 
     return(
         <>
@@ -42,7 +43,7 @@ function Pokemon({ pokemon }) {
     )
 }
 
-export default function CardsContainer({ onClick }) {
+export default function Gameboard({ onClick }) {
     return(
         <>
         <Card onClick={onClick}>
