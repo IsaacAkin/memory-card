@@ -2,17 +2,7 @@ import { useState, useEffect } from "react";
 
 function Card({ children, id, handleScore }) {
     return(
-        <div 
-        className="card"
-        style={{
-        border: '1px solid white',
-        alignSelf: 'center',
-        justifySelf: 'center',
-        padding: '10px',
-        cursor: 'pointer'
-        }}
-        onClick={() => handleScore(id)}
-        >
+        <div className="card" onClick={() => handleScore(id)}>
             {children}
         </div>
     )
@@ -47,8 +37,8 @@ function Pokemon({ pokemon }) {
 
     return(
         <>
-        <img src={spriteSrc} alt={pokemon} style={{ border: '1px solid green' }} />
-        <p className="name" style={{ border: '1px solid green' }}>{pokemon}</p>
+        <img src={spriteSrc} alt={pokemon} />
+        <p className="name">{pokemon}</p>
         </>
     )
 }
