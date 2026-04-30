@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { pokemon } from "../data.js";
 
 function Card({ children, id, handleScore }) {
     return(
@@ -54,22 +53,7 @@ function Pokemon({ pokemon }) {
     )
 }
 
-export default function Gameboard({ handleScore, score }) {
-    const [array, setArray] = useState(pokemon);
-
-    useEffect(() => {
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]]
-            }
-            
-            setArray(array);
-        }
-
-        shuffleArray(pokemon);
-    }, [score])
-
+export default function Gameboard({ handleScore, array }) {
     return(
         <>
         {
